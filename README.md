@@ -2,7 +2,7 @@
 
 This project demonstrates background subtraction-based object detection and tracking in videos using Python, OpenCV, and NumPy.
 
-It processes a video file (`vtest.avi`), identifies moving objects by calculating a static background and removing it, and then draws bounding boxes around these objects in each frame. The final processed video is saved as `Detect.avi`.
+It processes a video file, identifies moving objects by calculating a static background and removing it, and then draws bounding boxes around these objects in each frame.
 
 ***
 
@@ -31,7 +31,7 @@ It processes a video file (`vtest.avi`), identifies moving objects by calculatin
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    
     cd object_tracking
     ```
 
@@ -44,21 +44,22 @@ It processes a video file (`vtest.avi`), identifies moving objects by calculatin
 
 ## ▶️ Usage
 
-1.  Make sure the sample video `vtest.avi` is placed inside the `Media/` folder.
-2.  Open and run the Jupyter Notebook:
-    ```bash
-    jupyter notebook "Object detection and tracking in videos.ipynb"
+1.  Place your input video file inside the `Media/` folder.
+2.  Open the Jupyter Notebook and **update the video file path** in the cell where the video is loaded.
+    ```python
+    # Find this line and change 'your_video.mp4' to your file's name
+    cap = cv2.VideoCapture('Media/your_video.mp4')
     ```
-3.  Execute all the cells in order. The script will process the input video and save the result.
+3.  Run all cells in the notebook in order.
 4.  The output video will be generated in the root directory as **`Detect.avi`**.
 
 ***
 
 ## 📊 How It Works
 
-1.  **Frame Sampling**: The script first captures 30 random frames from `vtest.avi`.
-2.  **Median Frame Calculation**: It computes the median of these frames to generate a single, static background image. This method is effective at removing objects that may have been present in some of the sampled frames.
+1.  **Frame Sampling**: The script first captures 30 random frames from the input video.
+2.  **Median Frame Calculation**: It computes the median of these frames to generate a single, static background image.
 3.  **Processing Loop**: The script then iterates through every frame of the video from the beginning.
-4.  **Difference & Thresholding**: For each frame, it calculates the absolute difference between the frame and the median background, blurs the result to reduce noise, and applies Otsu's threshold to create a binary mask.
-5.  **Contour & Bounding Box**: It finds the contours in the binary mask and draws a purple bounding box around each detected contour on the original color frame.
-6.  **Video Compilation**: Each processed frame with bounding boxes is written to the `Detect.avi` output file.
+4.  **Difference & Thresholding**: For each frame, it calculates the absolute difference between the frame and the median background, blurs the result, and applies Otsu's threshold to create a binary mask.
+5.  **Contour & Bounding Box**: It finds the contours in the binary mask and draws a purple bounding box around each detected contour.
+6.  **Video Compilation**: Each processed frame is written to the `Detect.avi` output file.
